@@ -32,6 +32,9 @@ seed_products = [
 
 
 def get_db():
+    if not session:
+        raise Exception("Database not connected")
+
     db = session()
     try:
         yield db
@@ -40,6 +43,9 @@ def get_db():
 
 
 def init_db():
+    if not session:
+        return
+
     db = session()
     count = db.query(ProductModel).count()
 
@@ -103,4 +109,5 @@ def delete_product(id: int, db: Session = Depends(get_db)):
 
 @app.on_event("startup")
 def startup_event():
-    init_db()
+    if session:
+        init_db()
