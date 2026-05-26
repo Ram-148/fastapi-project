@@ -1,14 +1,17 @@
-import os
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 
-db_url = os.getenv("DATABASE_URL")
+db_url = "postgresql://root:QzU64pKgCD4jf0LIalFNt1Am9yQrTInq@dpg-d8assjjbc2fs73e5jh00-a.oregon-postgres.render.com:5432/render_seaa?sslmode=require"
 
-engine = None  # 👈 ADD THIS LINE
+engine = create_engine(
+    db_url,
+    pool_pre_ping=True
+)
 
-if db_url:
-    engine = create_engine(db_url, pool_pre_ping=True)
-    SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-    session = SessionLocal
-else:
-    session = None
+SessionLocal = sessionmaker(
+    autocommit=False,
+    autoflush=False,
+    bind=engine
+)
+
+session = SessionLocal
