@@ -3,9 +3,6 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 // Global styles
 import "./styles/globals.css";
-// Re-export shared table styles used by Dashboard
-import "./components/ProductTable.css";
-
 // Layout
 import MainLayout from "./layouts/MainLayout";
 

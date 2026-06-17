@@ -1,0 +1,84 @@
+.dash-card {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--surface-shadow);
+  padding: 24px 22px;
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition-spring), box-shadow var(--transition);
+  animation: fadeInUp .55s var(--ease-out-expo) both;
+}
+
+.dash-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--accent-color);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+/* shine sweep */
+.dash-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -150%;
+  width: 80%; height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,.5), transparent);
+  transform: skewX(-20deg);
+  transition: left .7s ease;
+  pointer-events: none;
+}
+.dash-card:hover::after { left: 150%; }
+
+.dash-card--clickable {
+  cursor: pointer;
+}
+.dash-card--clickable:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: var(--surface-shadow-lg);
+}
+
+.dash-card__top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.dash-card__icon {
+  font-size: 23px;
+  line-height: 1;
+  display: inline-block;
+  transition: transform var(--transition-spring);
+}
+.dash-card:hover .dash-card__icon {
+  transform: scale(1.25) rotate(8deg);
+}
+
+.dash-card__label {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: var(--text-500);
+}
+
+.dash-card__value {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--text-900);
+  letter-spacing: -1.2px;
+  line-height: 1;
+  margin-bottom: 6px;
+  background: linear-gradient(135deg, var(--text-900), var(--text-700));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.dash-card__sub {
+  font-size: 13px;
+  color: var(--text-500);
+}

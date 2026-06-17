@@ -1,0 +1,106 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 26px;
+  height: 66px;
+  background: rgba(255,255,255,.75);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border-bottom: 1px solid var(--surface-border);
+  box-shadow: 0 1px 20px rgba(31,28,68,.06);
+  animation: fadeIn .5s ease both;
+}
+
+.navbar__left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.navbar__menu-btn {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--text-700);
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition-fast), transform var(--transition-fast);
+  display: none;
+}
+
+.navbar__menu-btn:hover {
+  background: var(--bg);
+  transform: rotate(90deg);
+}
+
+.navbar__title {
+  font-size: 21px;
+  font-weight: 800;
+  color: var(--text-900);
+  letter-spacing: -.4px;
+  position: relative;
+  animation: fadeInUp .4s var(--ease-out-expo) both;
+}
+
+.navbar__right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar__icon-btn {
+  background: transparent;
+  border: none;
+  font-size: 19px;
+  cursor: pointer;
+  padding: 9px;
+  border-radius: 50%;
+  transition: background var(--transition-fast), transform var(--transition-spring);
+  color: var(--text-700);
+  position: relative;
+}
+.navbar__icon-btn:hover {
+  background: var(--bg);
+  transform: scale(1.15) rotate(-8deg);
+}
+.navbar__icon-btn::after {
+  content: '';
+  position: absolute;
+  top: 7px; right: 7px;
+  width: 7px; height: 7px;
+  background: var(--danger);
+  border-radius: 50%;
+  border: 2px solid #fff;
+  animation: pulseGlow 2s infinite;
+}
+
+.navbar__avatar {
+  background: linear-gradient(135deg, var(--primary-400), var(--pink));
+  background-size: 200% 200%;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: box-shadow var(--transition), transform var(--transition-spring), background-position .6s ease;
+}
+.navbar__avatar:hover {
+  box-shadow: 0 6px 20px rgba(124,58,237,.45);
+  transform: translateY(-2px) scale(1.08);
+  background-position: 100% 0;
+}
+
+@media (max-width: 768px) {
+  .navbar__menu-btn { display: flex; }
+  .navbar__title { font-size: 17px; }
+}

@@ -1,0 +1,39 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg);
+  position: relative;
+}
+
+/* The scrollable content column */
+.layout__body {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  transition: margin-left var(--transition);
+  min-width: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.layout--collapsed .layout__body {
+  margin-left: 64px;
+}
+
+.layout__main {
+  flex: 1;
+  padding: 30px 30px 44px;
+  overflow-x: hidden;
+  animation: fadeIn .45s ease both;
+}
+
+@media (max-width: 768px) {
+  .layout__body {
+    margin-left: 0;
+  }
+  .layout__main {
+    padding: 20px 16px 32px;
+  }
+}
