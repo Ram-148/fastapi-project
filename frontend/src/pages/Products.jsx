@@ -6,6 +6,9 @@ import "./Products.css";
 const EMPTY_FORM = { id: "", name: "", description: "", price: "", quantity: "" };
 
 export default function Products() {
+  const user = JSON.parse(
+  localStorage.getItem("user")
+);
   const [products, setProducts] = useState([]);
   const [form,     setForm]     = useState(EMPTY_FORM);
   const [editId,   setEditId]   = useState(null);
@@ -122,81 +125,109 @@ export default function Products() {
           </button>
         </div>
       </div>
-
       {/* Form card */}
-      <div className="card products-page__form-card">
-        <h2 className="products-page__form-title">
-          {editId ? "✏️ Edit Product" : "➕ Add Product"}
-        </h2>
+{(user?.role === "admin" ||
+  user?.role === "manager") && (
 
-        <form onSubmit={handleSubmit} className="products-page__form">
-          <input
-            className="input"
-            type="number"
-            name="id"
-            placeholder="ID"
-            value={form.id}
-            onChange={handleChange}
-            required
-            disabled={!!editId}
-          />
-          <input
-            className="input"
-            type="text"
-            name="name"
-            placeholder="Name"
-            value={form.name}
-            onChange={handleChange}
-            required
-          />
-          <input
-            className="input"
-            type="text"
-            name="description"
-            placeholder="Description"
-            value={form.description}
-            onChange={handleChange}
-            required
-          />
-          <input
-            className="input"
-            type="number"
-            name="price"
-            placeholder="Price"
-            value={form.price}
-            onChange={handleChange}
-            required
-            step="0.01"
-          />
-          <input
-            className="input"
-            type="number"
-            name="quantity"
-            placeholder="Quantity"
-            value={form.quantity}
-            onChange={handleChange}
-            required
-          />
+  <div className="card products-page__form-card">
 
-          <div className="products-page__form-actions">
-            <button className="btn btn-primary" type="submit" disabled={loading}>
-              {loading ? "Saving…" : editId ? "Update" : "Add Product"}
-            </button>
-            {editId && (
-              <button
-                className="btn btn-secondary"
-                type="button"
-                onClick={() => { resetForm(); setMessage(""); setError(""); }}
-              >
-                Cancel
-              </button>
-            )}
-          </div>
-        </form>
+    <h2 className="products-page__form-title">
+      {editId ? "✏️ Edit Product" : "➕ Add Product"}
+    </h2>
 
-        {message && <div className="alert alert-success">{message}</div>}
-        {error   && <div className="alert alert-error">{error}</div>}
+    <form onSubmit={handleSubmit} className="products-page__form">
+      <input
+        className="input"
+        type="number"
+        name="id"
+        placeholder="ID"
+        value={form.id}
+        onChange={handleChange}
+        required
+        disabled={!!editId}
+      />
+
+      <input
+        className="input"
+        type="text"
+        name="name"
+        placeholder="Name"
+        value={form.name}
+        onChange={handleChange}
+        required
+      />
+
+      <input
+        className="input"
+        type="text"
+        name="description"
+        placeholder="Description"
+        value={form.description}
+        onChange={handleChange}
+        required
+      />
+
+      <input
+        className="input"
+        type="number"
+        name="price"
+        placeholder="Price"
+        value={form.price}
+        onChange={handleChange}
+        required
+        step="0.01"
+      />
+
+      <input
+        className="input"
+        type="number"
+        name="quantity"
+        placeholder="Quantity"
+        value={form.quantity}
+        onChange={handleChange}
+        required
+      />
+
+      <div className="products-page__form-actions">
+        <button
+          className="btn btn-primary"
+          type="submit"
+          disabled={loading}
+        >
+          {loading ? "Saving…" : editId ? "Update" : "Add Product"}
+        </button>
+
+        {editId && (
+          <button
+            className="btn btn-secondary"
+            type="button"
+            onClick={() => {
+              resetForm();
+              setMessage("");
+              setError("");
+            }}
+          >
+            Cancel
+          </button>
+        )}
       </div>
+    </form>
+
+    {message && (
+      <div className="alert alert-success">
+        {message}
+      </div>
+    )}
+
+    {error && (
+      <div className="alert alert-error">
+        {error}
+      </div>
+    )}
+
+  </div>
+)}
+      
 
       {/* Table card */}
       <div className="card products-page__table-card">

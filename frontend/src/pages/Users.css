@@ -1,0 +1,134 @@
+.users-search {
+  max-width: 320px;
+  flex-shrink: 0;
+}
+
+.users-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.user-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: fadeInUp 0.4s var(--ease-out-expo) both;
+}
+
+.user-card__top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-card__avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-400), var(--pink));
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+.user-card__identity {
+  min-width: 0;
+}
+
+.user-card__name {
+  font-weight: 700;
+  color: var(--text-900);
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.user-card__you {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--primary-500);
+  background: #ede9fe;
+  padding: 1px 7px;
+  border-radius: 99px;
+}
+
+.user-card__email {
+  font-size: 13px;
+  color: var(--text-500);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.user-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.user-card__id {
+  font-size: 12px;
+  color: var(--text-500);
+  margin-left: auto;
+}
+
+.user-card__role-select {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.user-card__role-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-500);
+  text-transform: uppercase;
+  letter-spacing: .4px;
+}
+
+.user-card__actions {
+  display: flex;
+  gap: 8px;
+}
+.user-card__actions .btn {
+  flex: 1;
+}
+
+/* Skeleton loading state */
+.user-card--skeleton {
+  gap: 12px;
+}
+.skeleton-avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, #eee 25%, #f5f5f5 50%, #eee 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+.skeleton-line {
+  height: 12px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #eee 25%, #f5f5f5 50%, #eee 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+/* Error card */
+.users-error-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-left: 4px solid var(--danger);
+}
+.users-error-icon { font-size: 26px; }
+.users-error-title { font-weight: 700; color: var(--text-900); }
+.users-error-detail { font-size: 13px; color: var(--text-500); margin-top: 2px; }
+.users-error-card .btn { margin-left: auto; flex-shrink: 0; }

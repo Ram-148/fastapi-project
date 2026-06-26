@@ -9,15 +9,68 @@ export default function Login() {
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // TODO: integrate real auth endpoint
-    if (form.email && form.password) {
-      navigate("/dashboard");
-    } else {
-      setError("Please fill in all fields.");
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const formData = new URLSearchParams();
+
+    formData.append("username", form.email);
+    formData.append("password", form.password);
+
+    const response = await fetch(
+      "http://localhost:8000/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type":
+            "application/x-www-form-urlencoded",
+        },
+        body: formData,
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        data.detail || "Login failed"
+      );
     }
-  };
+
+    localStorage.setItem(
+      "access_token",
+      data.access_token
+    );
+
+    localStorage.setItem(
+      "refresh_token",
+      data.refresh_token
+    );
+
+    const profileResponse = await fetch(
+      "http://localhost:8000/profile",
+      {
+        headers: {
+          Authorization: `Bearer ${data.access_token}`,
+        },
+      }
+    );
+
+    const profileData =
+      await profileResponse.json();
+
+    localStorage.setItem(
+      "user",
+      JSON.stringify(profileData)
+    );
+
+    navigate("/dashboard");
+
+  } catch (err) {
+    setError(err.message);
+  }
+};
 
   return (
     <div className="auth-bg">
